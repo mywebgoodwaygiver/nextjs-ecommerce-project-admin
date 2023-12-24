@@ -5,14 +5,17 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {
-      colors: {
-        primary: '#5542F6',
-        highlight: '#eae8fb',
-        bgGray: '#fbfafd',
-      },
-    },
+  // theme: {
+  //   extend: {
+  //     colors: {
+  //       primary: '#5542F6',
+  //       highlight: '#eae8fb',
+  //       bgGray: '#fbfafd',
+  //     },
+  //   },
+  // },
+  daisyui: {
+    themes: ["light", "dark", "cupcake" , "night", "business", "black", "halloween"],
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }

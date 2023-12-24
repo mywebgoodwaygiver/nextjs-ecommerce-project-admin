@@ -83,6 +83,16 @@ export default function ProductForm({
     }
   }
 
+  // remove image from array
+  const handleRemoveImage = (e, index) => {
+    e.preventDefault();
+    const imageArray = [...images];
+    imageArray.splice(index, 1); // Removes 1 element at the specified index
+  
+    console.log(imageArray); // Output: Updated array without the removed element
+    setImages(imageArray);
+  };
+
   return (
       <form onSubmit={saveProduct}>
         <label>Product name</label>
@@ -123,10 +133,27 @@ export default function ProductForm({
             list={images}
             className="flex flex-wrap gap-1"
             setList={updateImagesOrder}>
-            {!!images?.length && images.map(link => (
-              <div key={link} className="h-24 bg-white p-4 shadow-sm rounded-sm border border-gray-200">
-                <img src={link} alt="" className="rounded-lg"/>
-              </div>
+            {!!images?.length && images.map((link, index) => (
+            <div key={link} className="relative h-24 w-auto bg-white p-4 shadow-sm rounded-sm border border-gray-200">
+            <svg
+              className="  border p-[2px] border-black rounded-full hover:bg-[lightgray] absolute top-0 right-0 w-5 h-5 text-gray-800 dark:text-[#b937ff] cursor-pointer"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+              onClick={(e)=>handleRemoveImage(e,index)}
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <img src={link} alt="" className="rounded-lg" />
+          </div>
+          
             ))}
           </ReactSortable>
           {isUploading && (

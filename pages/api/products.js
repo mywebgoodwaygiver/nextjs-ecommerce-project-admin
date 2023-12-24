@@ -14,18 +14,22 @@ export default async function handle(req, res) {
       res.json(await Product.find());
     }
   }
-
-  if (method === 'POST') {
-    const {title,description,price,images,category,properties} = req.body;
+try {
+   if (method === 'POST') {
+    const {title,description,price,images,properties} = req.body;
     const productDoc = await Product.create({
-      title,description,price,images,category,properties,
+      title,description,price,images,properties,
     })
     res.json(productDoc);
   }
+} catch (error) {
+  console.log("error: 💗💗💗💗💗💗💗💗💗💗💗", error)
+}
+ 
 
   if (method === 'PUT') {
-    const {title,description,price,images,category,properties,_id} = req.body;
-    await Product.updateOne({_id}, {title,description,price,images,category,properties});
+    const {title,description,price,images,properties,_id} = req.body;
+    await Product.updateOne({_id}, {title,description,price,images,properties});
     res.json(true);
   }
 
